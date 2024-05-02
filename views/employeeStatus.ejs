@@ -1,0 +1,35 @@
+<section class="status">
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text text-3xl font-bold mb-4">Employee Names and Status</h1>
+    <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-pink-200">
+            <thead>
+                <tr class=" bg-yellow-100 border-b border-gray-200">
+                    <th class="px-4 py-2 text-left">Employee Name</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Edit Status</th> <!-- Added column for editing status -->
+                </tr>
+            </thead>
+            <tbody>
+                <% employees.forEach(employee => { %>
+                    <tr class="border-b border-pink-200">
+                        <td class="text px-4 py-2 whitespace-nowrap"><%= employee.fullName %></td>
+                        <td class="px-4 py-2 whitespace-nowrap <%= employee.status === 1 ? 'text-green-600' : 'text-red-600' %>">
+                            <%= employee.status === 1 ? 'Active' : 'Inactive' %>
+                        </td>
+                        <td class="px-4 py-2 whitespace-nowrap">
+                            <form method="POST" action="/updateStatus/<%= employee.employeeNumber %>">
+                                <select name="status" class="px-2 py-1 bg-white border border-blue-300 rounded">
+                                    <option value="1" <%= employee.status === 1 ? 'selected' : '' %>>Active</option>
+                                    <option value="0" <%= employee.status === 0 ? 'selected' : '' %>>Inactive</option>
+                                </select>
+                                <button type="submit" class="ml-2 px-4 py-1 bg-blue-500 text-white rounded">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>

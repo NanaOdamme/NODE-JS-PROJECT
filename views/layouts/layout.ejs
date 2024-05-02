@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Style for scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px; /* Set the width of the scrollbar */
+        }
+    
+        ::-webkit-scrollbar-track {
+            background-color: #f1f1f1; /* Color of the track (the area behind the scrollbar) */
+        }
+    
+        ::-webkit-scrollbar-thumb {
+            background-color: #090226; /* Color of the scrollbar thumb (the draggable part) */
+            border-radius: 4px; /* Rounded corners for the thumb */
+        }
+    
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Color of the thumb on hover */
+        }
+    
+        /* Style for content area when sidebar is hidden */
+        .content-full {
+            margin-left: -34px; /* Remove left margin when sidebar is hidden */
+        }
+    
+        /* Style for content area when sidebar is visible */
+        .content-sidebar {
+            transition: margin-left 0.1s ease; /* Smooth transition for margin change */
+        }
+       
+
+        .day {
+            width: calc(100% / 7);
+        }
+        .toggle-button {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+            color: #ffffff;
+            padding: 8px;
+            z-index: 10;
+            margin: 5px;
+            cursor: pointer;
+        }
+        /* Custom styles for light and dark mode */
+        .dark-mode{
+          background-color: #04093f;
+        }
+        /* dashbord setting */
+       
+        .dark-mode .dash{
+            color: #ffffff;
+        }
+        .dark-mode .dash .header{
+            background-color: #242543;
+        }
+        .dark-mode .dash .outlinebtn{
+             border: 1px solid #fff;
+             color: #f1f1f1;
+        }
+        .dark-mode .dash .outlinebtn:hover{
+            color: #000000;
+
+       }
+       .dark-mode .dash .col1{
+        background-color: #383b72;
+   }
+   .dark-mode .dash .text-gray-600 {
+    color: rgb(244, 238, 238);
+   }
+  .dark-mode .dash .text-gray-500{
+    color: aliceblue;
+  }
+
+.dark-mode .status .text{
+    color: #f1f1f1;
+}
+
+.dark-mode .departmentlist{
+    color: #f1f1f1;
+}
+.dark-mode h1{
+    color: #f1f1f1;
+}
+        .togglebtn{
+            position: fixed;
+            padding: 8px;
+            margin-left: auto; /* Push the toggle button to the right */
+            right: 20px; /* Adjust right position as needed */
+            cursor: pointer;
+            
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <section class="flex h-screen">
+        <!-- Sidebar -->
+        <%- include('../partials/sidemenu') %>
+        <div class="toggle-button bg-gray-800" onclick="toggleSidebar()">
+            <!-- You can replace the icon below with your preferred icon code -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 4h18v2H3V4zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"/>
+            </svg>
+        </div>
+
+        <label for="toggle" class="togglebtn">
+            <input id="toggle" type="checkbox" class="sr-only" />
+            <!-- Sun Icon (Bootstrap) -->
+            <i class="bi bi-sun-fill text-yellow-400 text-2xl"></i>
+            <!-- Moon Icon (Bootstrap) -->
+            <i class="bi bi-moon-fill text-gray-700 text-2xl hidden"></i>
+        </label>
+
+        <!-- Main Content -->
+        <div id="content" class="flex-1 ml-64 p-8 content-sidebar">
+            <!-- Dynamic content -->
+            <%- body %>
+        </div>
+    </section>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+    
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('content-full');
+            content.classList.toggle('content-sidebar');
+        }
+        const toggle = document.getElementById('toggle');
+        const sunIcon = document.querySelector('.bi-sun-fill');
+        const moonIcon = document.querySelector('.bi-moon-fill');
+
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

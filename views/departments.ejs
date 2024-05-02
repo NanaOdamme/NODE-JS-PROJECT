@@ -1,0 +1,30 @@
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4">Departments</h1>
+
+        <!-- Form to add new department -->
+        <form action="/departments" method="POST" class="mb-4">
+            <div class="flex flex-col">
+                <label for="departmentName" class="block text-sm font-medium text-gray-700">Department Name:</label>
+                <input type="text" id="departmentName" name="departmentName" required
+                       class="mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mt-2">Add Department</button>
+        </form>
+
+        <!-- List of existing departments -->
+        <ul class="departmentlist space-y-2">
+            <% departments.forEach(department => { %>
+                <li class="flex justify-between items-center border border-yellow-300 rounded-md p-3">
+                    <span><%= department.name %></span>
+                    <div>
+                        <a href="/departments/<%= department.id %>/edit" class="text-blue-500 mr-3">Edit</a>
+                        <form action="/departments/<%= department.id %>?_method=DELETE" method="POST" class="inline">
+                            <button type="submit" class="text-red-500">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+

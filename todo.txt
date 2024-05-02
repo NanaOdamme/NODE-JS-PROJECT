@@ -1,0 +1,3 @@
+
+add new table to set employee, position. and salaries.
+create sql functions and procedures to calculate salaries and taxes

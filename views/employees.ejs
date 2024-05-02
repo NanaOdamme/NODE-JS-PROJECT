@@ -1,0 +1,62 @@
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl mb-10  font-bold mb-4">Employee Data</h1>
+    <h1 class="text-4xl text-gray-500 text-center mb-6  p-1 font-bold  border-b-4 border-green-300">Employee List</h1>
+
+    <div class="overflow-x-auto rounded-lg shadow-lg">
+        <div class="overflow-x-auto ">
+            <table class=" min-w-full divide-y divide-pink-200">
+                <thead class="bg-yellow-50">
+                    <tr>
+                        <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                        <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+                        <th scope="col" class="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Middle Name</th>
+                        <th scope="col" class="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Address</th>
+                        <th scope="col" class="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Department</th>
+                        <th scope="col" class="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th scope="col" class="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th scope="col" class="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Employee Number</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-pink-200">
+                    <% employees.forEach(employee => { %>
+                        <tr>
+                            <td class="px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.firstName %></td>
+                            <td class="px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.lastName %></td>
+                            <td class="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.middleName %></td>
+                            <td class="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.address %></td>
+                            <td class="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.departmentName %></td>
+                            <td class="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.email %></td>
+                            <td class="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.status ? 'Active' : 'Inactive' %></td>
+                            <td class="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.employeeNumber %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1 class="mt-10 text-4xl text-gray-500 text-center mb-6  p-1 font-bold  border-b-4 border-green-300">Edit Employee Details</h1>
+    <div class="overflow-x-auto rounded-lg shadow-lg">
+        <table class="min-w-full divide-y divide-pink-200 ">
+            <thead class="bg-yellow-50">
+                <tr>
+                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+                    <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-pink-200">
+                <% employees.forEach(employee => { %>
+                    <tr>
+                        <td class="px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.firstName %></td>
+                        <td class="px-4 md:px-6 py-4 whitespace-nowrap"><%= employee.lastName %></td>
+                        <td class="px-4 md:px-6 py-4 whitespace-nowrap"><a href="/employees/<%= employee.id %>/edit" class="text-blue-500 hover:text-blue-700">Edit</a></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="mt-8">
+        <a href="/employees/new" class="shadow-lg bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Add Employee</a>
+    </div>
+</div>

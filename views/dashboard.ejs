@@ -1,0 +1,501 @@
+<style>
+    @keyframes grow {
+        0% {
+            height: 0%;
+        }
+        100% {
+            height: var(--height);
+        }
+    }
+
+    .animated-bar {
+        animation: grow 1s ease-in-out forwards;
+    }
+    @media (max-width: 640px) {
+      .sm\:px-10 {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+    .xl\:grid-cols-4 {
+      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+    }
+
+</style>
+
+
+<div class="dash flex-grow text-gray-800 mt-10">
+  <header class="container px-6 space-y-6 flex flex-col-2 space-y-6 md:space-y-0 md:flex-row justify-between">
+  <div class="p-6 sm:p-10 space-y-6 header flex rounded-lg  items-center h-20 px-10 sm:px-10 w-full bg-white">
+    <div class="div">
+      <h1 class="text-3xl text-blue-500 md:text-4xl font-semibold mb-2">Welcome <%= username %></h1>
+      <p class="text-base md:text-sm hidden md:block">Payroll Processing At Your Finger Tips</p>
+    </div>
+    
+    
+    <div class="flex flex-shrink-0 items-center ml-auto">
+        
+      <div class="border-l pl-3 ml-3 space-x-1">
+        <button class="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
+          <span class="sr-only">Notifications</span>
+          <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>
+          <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full animate-ping"></span>
+          <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+        </button>
+        <button class="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
+          <span class="sr-only">Log out</span>
+         <a href="/logout"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg></a> 
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <main class="p-6 sm:p-10 space-y-6">
+      <div class=" flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
+        <div class="mr-6">
+          
+        </div>
+        <div class=" flex flex-wrap items-start justify-end -mb-3">
+          <a href="/users">
+            <button class="outlinebtn inline-flex px-5 py-3 text-blue-600 hover:text-blue-700 focus:text-blue-700 hover:bg-blue-100 focus:bg-blue-100 border border-blue-600 rounded-md mb-3">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            Manage Users
+          </button>
+        </a>
+        <a href="/add-user">
+          <button class="fullbtn inline-flex px-5 py-3 text-white bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 rounded-md ml-6 mb-3">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Create new User
+          </button>
+        </a>
+        </div>
+      </div>
+      <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div class="col1 flex items-center p-8 bg-pink-100 shadow rounded-lg">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">89562</span>
+            <span class="block text-gray-500">Daily Unique Visitors</span>
+          </div>
+        </div>
+        <div class="col1 flex items-center p-8 bg-white shadow rounded-lg">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">27.6%</span>
+            <span class="block text-gray-500">CTR</span>
+          </div>
+        </div>
+        <div class="col1 flex items-center p-8 bg-purple-100 shadow rounded-lg">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+            </svg>
+          </div>
+          <div>
+            <span class="inline-block text-2xl font-bold">3m 45s</span>
+            <span class="inline-block text-xl text-gray-500 font-semibold">(-32%)</span>
+            <span class="block text-gray-500">Average Engagement Time</span>
+          </div>
+        </div>
+        <div class="col1 flex items-center p-8 bg-white shadow rounded-lg">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">956326</span>
+            <span class="block text-gray-500">Event Count</span>
+          </div>
+        </div>
+      </section>
+      <section class="grid md:grid-cols-1   gap-6">
+        <div class="col1 calendar bg-green-100 shadow-lg rounded-lg p-4">
+          <div class="flex justify-between items-center mb-4">
+              <button id="prevMonth" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md">
+                  &lt;
+              </button>
+              <h2 id="currentMonth" class="text-lg font-bold">April 2024</h2>
+              <button id="nextMonth" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md">
+                  &gt;
+              </button>
+          </div>
+          <div class=" grid grid-cols-7 gap-2">
+              <div class="text-center font-semibold text-gray-600">Sun</div>
+              <div class="text-center font-semibold text-gray-600">Mon</div>
+              <div class="text-center font-semibold text-gray-600">Tue</div>
+              <div class="text-center font-semibold text-gray-600">Wed</div>
+              <div class="text-center font-semibold text-gray-600">Thu</div>
+              <div class="text-center font-semibold text-gray-600">Fri</div>
+              <div class="text-center font-semibold text-gray-600">Sat</div>
+              <div class="text-center font-semibold">1</div>
+              <div class="text-center font-semibold">2</div>
+              <div class="text-center font-semibold">3</div>
+              <div class="text-center font-semibold">4</div>
+              <div class="text-center font-semibold">5</div>
+              <div class="text-center font-semibold">6</div>
+              <div class="text-center font-semibold">7</div>
+              <div class="text-center font-semibold">8</div>
+              <div class="text-center font-semibold">9</div>
+              <div class="text-center font-semibold">10</div>
+              <div class="text-center font-semibold">11</div>
+              <div class="text-center font-semibold">12</div>
+              <div class="text-center font-semibold">13</div>
+              <div class="text-center font-semibold">14</div>
+              <div class="text-center font-semibold">15</div>
+              <div class="text-center font-semibold">16</div>
+              <div class="text-center font-semibold">17</div>
+              <div class="text-center font-semibold">18</div>
+              <div class="text-center font-semibold">19</div>
+              <div class="text-center font-semibold">20</div>
+              <div class="text-center font-semibold">21</div>
+              <div class="text-center font-semibold">22</div>
+              <div class="text-center font-semibold">23</div>
+              <div class="text-center font-semibold">24</div>
+              <div class="text-center font-semibold">25</div>
+              <div class="text-center font-semibold">26</div>
+              <div class="text-center font-semibold">27</div>
+              <div class="text-center font-semibold">28</div>
+              <div class="text-center font-semibold">29</div>
+              <div class="text-center font-semibold">30</div>
+              <div class="text-center font-semibold">31</div>
+              <div class="text-center font-semibold">1</div>
+              <div class="text-center font-semibold">2</div>
+              <div class="text-center font-semibold">3</div>
+              <div class="text-center font-semibold">4</div>
+              <div class="text-center font-semibold">5</div>
+          </div>
+      </div>
+      <div class="col1 bg-white shadow-lg rounded-lg p-4">
+            <h2 class="text-2xl font-bold mb-4">Financial Year Ending Table</h2>
+            <div class="overflow-x-auto rounded-lg">
+                <table class="col1 w-full min-w-max bg-white border-collapse border border-pink-300">
+                  <thead>
+                    <tr class="text-center">
+                        <th class="px-4 py-2 bg-yellow-200 border border-pink-300">Year</th>
+                        <th class="px-4 py-2 bg-yellow-200 border border-pink-300">Revenue</th>
+                        <th class="px-4 py-2 bg-yellow-200 border border-pink-300">Expenses</th>
+                        <th class="px-4 py-2 bg-yellow-200 border border-pink-300">Profit</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2023</td>
+                        <td class="px-4 py-2 border border-pink-300">$150,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$100,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$50,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2022</td>
+                        <td class="px-4 py-2 border border-pink-300">$130,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$90,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$40,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2021</td>
+                        <td class="px-4 py-2 border border-pink-300">$120,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$80,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$40,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2020</td>
+                        <td class="px-4 py-2 border border-pink-300">$110,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$75,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$35,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2019</td>
+                        <td class="px-4 py-2 border border-pink-300">$100,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$70,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$30,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2018</td>
+                        <td class="px-4 py-2 border border-pink-300">$90,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$65,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$25,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2017</td>
+                        <td class="px-4 py-2 border border-pink-300">$85,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$60,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$25,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2016</td>
+                        <td class="px-4 py-2 border border-pink-300">$80,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$55,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$25,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2015</td>
+                        <td class="px-4 py-2 border border-pink-300">$75,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$50,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$25,000</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 border border-pink-300">2014</td>
+                        <td class="px-4 py-2 border border-pink-300">$70,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$45,000</td>
+                        <td class="px-4 py-2 border border-pink-300">$25,000</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+      </section> 
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+    </section>
+    
+      <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3  gap-6">
+        <div class="col1 flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">
+            <div class="bg-blue-500 rounded-lg p-6 text-white shadow">
+            <h2 class="text-xl font-semibold mb-4">Sales Chart</h2>
+            <canvas id="salesChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+          <div class="p-4 flex-grow">
+            <div class="px-6 py-5 font-semibold border-b border-gray-100">
+              <div class="bg-pink-400 rounded-lg p-6 text-black shadow">
+                <h2 class="text-xl font-semibold mb-4">Revenue Graph</h2>
+                <canvas id="revenueGraph" width="400" height="200"></canvas>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col1 flex items-center p-8 bg-white shadow rounded-lg">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path fill="#fff" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+            </svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">100+</span>
+            <span class="block text-gray-500">Employees</span>
+          </div>
+        </div>
+        <div class="col1 flex items-center p-8 bg-white shadow rounded-lg">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-teal-600 bg-teal-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">12+</span>
+            <span class="block text-gray-500">Departments</span>
+          </div>
+        </div>
+        <div class="col1 row-span-1 bg-white shadow rounded-lg">
+          <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+            <span>Employees</span>
+          </div>
+          <div class="overflow-y-auto" style="max-height: 24rem;">
+            <ul class="p-6 space-y-6">
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Annette Watson profile picture">
+                    </div>
+                    <span class="text-gray-600">United States</span>
+                    <span class="ml-auto font-semibold text-green-600">Active</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Calvin Steward profile picture">
+                    </div>
+                    <span class="text-gray-600">Spain</span>
+                    <span class="ml-auto font-semibold text-red-600">Inactive</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Ralph Richards profile picture">
+                    </div>
+                    <span class="text-gray-600">United Kingdom</span>
+                    <span class="ml-auto font-semibold text-green-600">Active</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Bernard Murphy profile picture">
+                    </div>
+                    <span class="text-gray-600">Malaysia</span>
+                    <span class="ml-auto font-semibold text-red-600">Inactive</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Arlene Robertson profile picture">
+                    </div>
+                    <span class="text-gray-600">Russia</span>
+                    <span class="ml-auto font-semibold text-green-600">Active</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Jane Lane profile picture">
+                    </div>
+                    <span class="text-gray-600">Canada</span>
+                    <span class="ml-auto font-semibold text-green-600">Active</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Pat Mckinney profile picture">
+                    </div>
+                    <span class="text-gray-600">India</span>
+                    <span class="ml-auto font-semibold text-red-600">Inactive</span>
+                </li>
+                <li class="flex items-center">
+                    <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Norman Walters profile picture">
+                    </div>
+                    <span class="text-gray-600">Australia</span>
+                    <span class="ml-auto font-semibold text-green-600">Active</span>
+                </li>
+            </ul>
+        </div>
+        
+        </div>
+
+        
+        <!--payroll statistics-->
+        <div class="col1 flex flex-col row-span-1 bg-white shadow rounded-lg">
+            <div class="px-6 py-5 font-semibold border-b border-gray-100">Payroll Statistics</div>
+            <div class="p-4 flex-grow">
+                <div class=" flex items-center justify-between h-full">
+                    <div class="relative w-2/5 h-full mr-4">
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-r from-green-400 to-green-600 rounded-md animated-bar" style="--height: 85%;"></div>
+                        <div class=" top-0 left-0 w-full h-full flex justify-center items-start text-gray-600 font-semibold">Performance in Recent Years</div>
+                        <div class="absolute bottom-0 left-0 w-full h-full flex justify-center items-end text-gray-600 font-semibold">85%</div>
+                    </div>
+                    <div class="relative w-2/5 h-full">
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-r from-red-400 to-red-600 rounded-md animated-bar" style="--height: 15%;"></div>
+                        <div class="absolute bottom-0 left-0 w-full h-full flex justify-center items-end text-gray-600 font-semibold">15%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+       
+    </main>
+   
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+  <script>
+const currentMonthElement = document.getElementById('currentMonth');
+        const prevMonthButton = document.getElementById('prevMonth');
+        const nextMonthButton = document.getElementById('nextMonth');
+
+        const months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        let currentMonthIndex = new Date().getMonth();
+
+        function renderCalendar(monthIndex) {
+            const year = new Date().getFullYear();
+            const month = months[monthIndex];
+            const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+            currentMonthElement.textContent = `${month} ${year}`;
+
+            // Clear existing days
+            const daysContainer = document.querySelector('.grid-cols-7');
+            daysContainer.innerHTML = '';
+
+            // Render days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('text-center', 'font-semibold');
+                dayElement.textContent = day;
+                daysContainer.appendChild(dayElement);
+            }
+        }
+
+        prevMonthButton.addEventListener('click', () => {
+            currentMonthIndex--;
+            if (currentMonthIndex < 0) {
+                currentMonthIndex = 11;
+            }
+            renderCalendar(currentMonthIndex);
+        });
+
+        nextMonthButton.addEventListener('click', () => {
+            currentMonthIndex++;
+            if (currentMonthIndex > 11) {
+                currentMonthIndex = 0;
+            }
+            renderCalendar(currentMonthIndex);
+        });
+
+        // Initial render
+        renderCalendar(currentMonthIndex);
+
+
+  const salesData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [{
+        label: 'Sales',
+        data: [50, 60, 70, 65, 80, 75],
+        backgroundColor: 'rgba(50, 12, 126, 12)',
+        borderColor: 'rgba(33, 150, 243, 1)',
+        borderWidth: 1
+    }]
+};
+
+const revenueData = {
+  labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+  datasets: [{
+      label: 'Revenue',
+      data: [20000, 25000, 30000, 28000],
+      backgroundColor: 'rgba(16, 33, 100, 0.8)',
+      borderColor: 'rgba(100, 30, 99, 1)',
+      borderWidth: 1
+  }]
+};
+
+const graphConfig = {
+  type: 'line',
+  data: revenueData,
+  options: {
+      scales: {
+          y: {
+              beginAtZero: true
+          }
+      }
+  }
+};
+const chartConfig = {
+  type: 'bar',
+  data: salesData,
+  options: {
+      scales: {
+          y: {
+              beginAtZero: true
+          }
+      }
+  }
+};
+const salesChartCtx = document.getElementById('salesChart').getContext('2d');
+    new Chart(salesChartCtx, chartConfig);
+const revenueGraphCtx = document.getElementById('revenueGraph').getContext('2d');
+    new Chart(revenueGraphCtx, graphConfig);
+</script>

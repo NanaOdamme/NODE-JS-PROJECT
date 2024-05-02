@@ -1,0 +1,198 @@
+<style>
+    /* Add this CSS to your existing styles or a separate stylesheet */
+
+    /* Highlight style */
+    .highlight {
+        background-color: #625c7a; /* Light gray background */
+        color: #ffffff; /* Dark text color */
+        font-weight: bold; /* Bold text */
+        border-left: 2px solid #fbff00; /* Left border color */
+        padding: 8px; /* Padding left for the text */
+    }
+
+    /* Hover effect for highlighted items */
+    .highlight:hover {
+        background-color: #e0e0e0; /* Darker background on hover */
+    }
+</style>
+
+<aside class="w-64 bg-gray-800 text-white h-full fixed top-0 left-0 flex flex-col overflow-y-auto pt-10" id="sidebar">
+    <div class="p-4">
+        <h1 class="text-lg font-bold">Payroll</h1>
+    </div>
+    
+    <button class="inline-flex items-center pb-4 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
+        <span class="sr-only">User Menu</span>
+        <span class="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
+            <img src="" alt="user profile photo" class="h-full w-full object-cover">
+          </span>
+        <div class="hidden md:flex md:flex-col md:items-start md:leading-tight">
+          <span class="font-semibold">User</span>
+          <span class="text-sm text-gray-600">admin</span>
+        </div>
+      </button>
+
+      <div class="mx-2 mt-8 mb-8">
+        <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="absolute h-6 w-6 mt-2.5 ml-2 text-gray-400">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg>
+        <input type="text" role="search" id="searchInput" placeholder="Quick Search" class="py-2 pl-10 w-full pr-4 text-black border-4 border-transparent placeholder-gray-400 focus:bg-gray-50 rounded-lg" />
+    </div>
+
+    <nav class="space-y-6"> 
+        <div class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
+            <a href="/dashboard">Dashboard</a>
+        </div>
+        
+        <div class="group">
+            <button class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out" onclick="toggleDropdown('dropdown1')">
+                General Setup
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition duration-150 ease-in-out" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13.293 7.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Dropdown Content 1 -->
+            <div id="dropdown1" class="group-hover:block hidden bg-gray-700 p-2 space-y-1 transition duration-150 ease-in-out">
+                <a href="/company-profiles" class="block px-4 py-2 text-sm hover:bg-gray-600">Company Profile</a>
+                <a href="/locations" class="block px-4 py-2 text-sm hover:bg-gray-600">Locations</a>
+                <a href="/citylist" class="block px-4 py-2 text-sm hover:bg-gray-600">cities</a>
+                <a href="/employeeStatus" class="block px-4 py-2 text-sm hover:bg-gray-600">Employee status</a>
+            </div>
+        </div>
+       
+        <div class="group">
+            <button class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out" onclick="toggleDropdown('dropdown2')">
+                Payroll Setups
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition duration-150 ease-in-out" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13.293 7.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Dropdown Content 1 -->
+            <div id="dropdown2" class="group-hover:block hidden bg-gray-700 p-2 space-y-1 transition duration-150 ease-in-out">
+                <a href="/departments" class="block px-4 py-2 text-sm hover:bg-gray-600">Departments</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Remunerations</a>
+                <a href="/salarySetup" class="block px-4 py-2 text-sm hover:bg-gray-600">Employee Salary Setups</a>
+            </div>
+        </div>
+        <div class="group">
+            <button class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out" onclick="toggleDropdown('dropdown3')">
+                Data Entry
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition duration-150 ease-in-out" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13.293 7.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Dropdown Content 1 -->
+            <div id="dropdown3" class="group-hover:block hidden bg-gray-700 p-2 space-y-1 transition duration-150 ease-in-out">
+                <a href="/employees" class="block px-4 py-2 text-sm hover:bg-gray-600">Employee Data</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Employee Loans</a>
+            </div>
+        </div>
+
+        <!-- Dropdown 1 -->
+        <div class="group">
+            <button class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out" onclick="toggleDropdown('dropdown4')">
+                Process Payroll
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition duration-150 ease-in-out" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13.293 7.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Dropdown Content 1 -->
+            <div id="dropdown4" class="group-hover:block hidden bg-gray-700 p-2 space-y-1 transition duration-150 ease-in-out">
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Process Regular Pay</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Process Early Pay</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Post Regular Payroll</a>
+            </div>
+        </div>
+
+        <div class="group">
+            <button class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out" onclick="toggleDropdown('dropdown5')">
+                Reports
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition duration-150 ease-in-out" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13.293 7.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Dropdown Content 1 -->
+            <div id="dropdown5" class="group-hover:block hidden bg-gray-700 p-2 space-y-1 transition duration-150 ease-in-out">
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Payslip</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Process Pay Report</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Employee List</a>
+            </div>
+        </div>
+
+        <!-- Dropdown 2 -->
+        <div class="group ">
+            <button class="w-full py-2 px-4 flex items-center justify-between text-left hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out" onclick="toggleDropdown('dropdown6')">
+                Settings
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition duration-150 ease-in-out" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13.293 7.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <!-- Dropdown Content 2 -->
+            <div id="dropdown6" class="drop group-hover:block hidden bg-gray-700 p-2 space-y-1 transition duration-150 ease-in-out">
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">General Settings</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Company Setting</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600">Payroll Settings</a>
+            </div>
+        </div>
+        <ul class="flex">
+           <a href="/logout"><li class="py-2 px-4 hover:bg-gray-700 cursor-pointer">Logout</li></a> 
+        </ul>
+    </nav>
+    
+</aside>
+
+
+
+<script>
+
+    function toggleDropdown(id) {
+        const dropdown = document.getElementById(id);
+        dropdown.classList.toggle('hidden');
+
+        // Smooth scroll to the dropdown
+        if (!dropdown.classList.contains('hidden')) {
+            dropdown.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+// Function to handle search functionality
+function handleSearch() {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    const menuItems = document.querySelectorAll('#sidebar nav a');
+
+    let found = false;
+
+    menuItems.forEach(item => {
+        const itemText = item.textContent.toLowerCase();
+        if (itemText.includes(searchQuery)) {
+            found = true;
+            item.classList.add('highlight');
+            const parentDropdown = item.closest('.group');
+            if (parentDropdown) {
+                parentDropdown.classList.add('group-hover:block');
+                parentDropdown.classList.remove('hidden');
+                const dropdownButton = parentDropdown.querySelector('button');
+                if (dropdownButton) {
+                    dropdownButton.click();
+                }
+                item.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            item.classList.remove('highlight');
+        }
+    });
+
+    // If no match found, clear previous highlights and close dropdowns
+    if (!found) {
+        menuItems.forEach(item => item.classList.remove('highlight'));
+        const dropdowns = document.querySelectorAll('.group');
+        dropdowns.forEach(dropdown => dropdown.classList.remove('group-hover:block'));
+    }
+}
+
+// Attach event listener to the search input
+document.getElementById('searchInput').addEventListener('input', handleSearch);
+
+</script>
+
+

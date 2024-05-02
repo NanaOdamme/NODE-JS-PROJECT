@@ -1,0 +1,55 @@
+<h1 class="text-2xl font-bold mb-4">Countries and Cities</h1>
+<div class="overflow-x-auto">
+    <table class="mb-6 min-w-full  border-collapse border border-gray-300">
+        <thead>
+            <tr class="bg-yellow-100">
+                <th class="border border-pink-300 px-4 py-2">Countries</th>
+                <th class="border border-pink-300 px-4 py-2">Cities</th>
+                <th class="border border-pink-300 px-4 py-2">Actions</th> <!-- New column for actions -->
+            </tr>
+        </thead>
+        <tbody>
+            <% countries.forEach(country => { %>
+                <tr class="border-b border-pink-300">
+                    <td class="border border-pink-300 px-4 py-2"><%= country.name %></td>
+                    <td class="border border-pink-300 px-4 py-2">
+                        <ul>
+                            <% country.cities.forEach(city => { %>
+                                <li><%= city.name %></li>
+                            <% }); %>
+                        </ul>
+                        
+                    </td>
+                    <td class="border border-pink-300 px-2 py-2">
+                        <div class="flex ">
+                        <!-- Update Country Button -->
+                        <a href="/countries/<%= country.id %>/edit">
+                            <button class="inline-flex px-3 py-1 text-blue-600 hover:text-blue-700 focus:text-blue-700 hover:bg-blue-100 focus:bg-blue-100 border border-blue-600 rounded-md mr-2">
+                                Edit
+                            </button>
+                        </a>
+                        <!-- Delete Country Button -->
+                        <form action="/countries/<%= country.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this country?');">
+                            <button type="submit" class="inline-flex px-3 py-1 text-red-600 hover:text-red-700 focus:text-red-700 hover:bg-red-100 focus:bg-red-100 border border-red-600 rounded-md">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+<div class="flex justify-end">
+<a href="/countries">
+        <button class=" inline-flex px-5 py-3 text-white bg-blue-500 hover:text-blue-700 focus:text-blue-700 hover:bg-blue-100 focus:bg-blue-100 border border-blue-600 rounded-md mb-3">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+        Add Countries
+      </button>
+     
+      
+      
+    </div>

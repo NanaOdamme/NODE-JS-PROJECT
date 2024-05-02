@@ -1,0 +1,25 @@
+<script>
+    function viewCompanyDetails(companyId) {
+        window.location.href = `/company-profile/${companyId}`;
+    }
+</script>
+
+<div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">All Company Profiles</h1>
+    <div class="grid grid-cols-1 gap-4">
+        <% companyProfiles.forEach(company => { %>
+            <div class="bg-yellow-100
+            shadow-md rounded-md p-4 cursor-pointer" onclick="viewCompanyDetails('<%= company.id %>')">
+                <h2 class="text-lg font-bold mb-2"><%= company.company_name %></h2>
+                <p><strong>Business Type/Industry:</strong> <%= company.business_type %></p>
+                <p><strong>Year Established:</strong> <%= company.year_established %></p>
+            </div>
+        <% }); %>
+    </div>
+    <div class="flex mt-6">
+        <a href="/addCompany"
+            class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Add Company</a>
+    </div>
+</div>
+
+

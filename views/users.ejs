@@ -1,0 +1,58 @@
+<h1 class="text-2xl md:text-4xl lg:text-5xl text-center my-8"><%= title %></h1>
+
+<div class="container mx-auto">
+    <table class=" min-w-full divide-y divide-pink-200">
+        <thead class="bg-yellow-50">
+            <tr>
+                <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Admins</th>
+                <th scope="col" class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Users</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-pink-200">
+        <tr>
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap">
+            <ul class="divide-y divide-gray-200">
+              <% admins.forEach(admin => { %>
+                <li class="py-2"><%= admin.username %></li>
+              <% }); %>
+            </ul>
+          </td>
+          <td>
+            <ul class="divide-y divide-gray-200">
+              <% users.forEach(user => { %>
+                <li class="py-2"><%= user.username %></li>
+              <% }); %>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <h1 class="text-2xl md:text-4xl lg:text-3xl text-center my-8">Edit Users</h1>
+  <ul class="mt-4 divide-y divide-gray-200">
+    <% users.forEach(user => { %>
+      <li class="flex flex-col sm:flex-row items-center justify-between py-3">
+        <span class="flex-1 sm:mx-6 mb-2 sm:mb-0"><%= user.username %></span>
+        <form action="/users/update/<%= user.id %>" method="post" class="flex items-center space-x-2 mx-2">
+          <input type="text" name="username" placeholder="New Username" class="p-4">
+          <input type="password" name="password" placeholder="New Password" class="p-4">
+          <button type="submit" class="flex items-center justify-center bg-green-400 hover:bg-green-600 text-white px-4 py-2 rounded">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </button>
+        </form>
+        <form action="/users/delete/<%= user.id %>" method="post">
+          <button type="submit" class="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+  
+  
+  

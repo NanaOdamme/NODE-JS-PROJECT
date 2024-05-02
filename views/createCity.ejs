@@ -1,0 +1,27 @@
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Create City</h1>
+    <form action="/cities" method="POST">
+        <div class="mb-4">
+            <label for="cityName" class="block text-sm font-medium text-gray-700">City Name:</label>
+            <input type="text" id="cityName" name="cityName" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="mb-4">
+            <label for="countryId" class="block text-sm font-medium text-gray-700">Country:</label>
+            <select id="countryId" name="countryId" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <% countries.forEach(country => { %>
+                <option value="<%= country.id %>"><%= country.name %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="flex justify-between">
+            <button type="submit"
+                class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Create</button>
+            <a href="/citylist"
+                class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Back</a>
+        </div>
+        
+        </form>
+</div>
+
