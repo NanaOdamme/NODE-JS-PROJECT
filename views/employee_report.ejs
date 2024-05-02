@@ -13,13 +13,20 @@
     </div>
 </form>
 
+
     
 <div class="bg-white mt-5 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex justify-between mb-10">
+      <h4>Demo</h4>
+      <h1 class="text-3xl font-bold text-blue-800">Reports</h1>
+        
+    </div>
+    <hr class="my-4 border-t-2 border-pink-300">
     <header class="text-center mb-4">
         <h1 class="text-3xl font-bold text-green-500">Employee List By Departments</h1>
-        <p class="text-gray-600 mt-2">Generated on: <span id="date"></span> at <span id="time"></span></p>
+       
     </header>
-    <hr class="my-4 border-t-2 border-blue-300">
+    
     <div class="overflow-x-auto rounded-lg">
     <table class="mb-6 min-w-full border-collapse border border-gray-300">
         <thead>
@@ -37,10 +44,12 @@
             <% }); %>
         </tbody>
     </table>
+    <p class="text-gray-600 mt-2">Generated on: <span id="date"></span> at <span id="time"></span></p>
 </div>
 </div>
 
-<div class="justify-end mt-5">
+
+<div class="flex justify-end mt-5">
 <a href="/print-report" class="mt-5 ml-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Print</a>
 </div>
     <script>
