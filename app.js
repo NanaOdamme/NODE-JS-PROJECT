@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const routes = require('./routes');
 const connection = require('./db');
+const puppeteer = require('puppeteer');
 const path = require('path');
 const { title } = require('process');
 const app = express();
@@ -1159,7 +1160,88 @@ app.get('/employee-loans', (req, res) => {
   });
 });
 
+app.get('/employees-report', (req, res) => {
+  const { department } = req.query;
+  let query = `
+  SELECT CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) AS fullName, status, employeeNumber, departments.name As departmentName
+  FROM employees
+      JOIN departments ON employees.department = departments.id
+  `;
+  
+  if (department) {
+      query += ` WHERE employees.department = ${department}`;
+  }
 
+  connection.query(query, (error, results) => {
+      if (error) {
+          console.error('Error fetching employees:', error);
+          res.send('Error fetching employees data.');
+          return;
+      }
+
+      // Fetch departments for the dropdown
+      const departmentsQuery = `SELECT * FROM departments`;
+      connection.query(departmentsQuery, (deptError, departments) => {
+          if (deptError) {
+              console.error('Error fetching departments:', deptError);
+              res.send('Error fetching departments data.');
+              return;
+          }
+
+          res.render('employee_report', { title: 'Employee Report', employees: results, departments });
+      });
+  });
+});
+
+//print report
+const puppeteer = require('puppeteer');
+
+app.get('/print-report', async (req, res) => {
+    const { department } = req.query;
+    let query = `
+        SELECT CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) AS fullName, departments.name AS departmentName
+        FROM employees
+        JOIN departments ON employees.department = departments.id
+    `;
+    
+    if (department) {
+        query += ` WHERE employees.department = ${department}`;
+    }
+
+    connection.query(query, async (error, results) => {
+        if (error) {
+            console.error('Error fetching employees:', error);
+            res.send('Error fetching employees data.');
+            return;
+        }
+
+        try {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+
+            // Render the HTML content using EJS template
+            const renderedHTML = ejs.render(yourTemplateHTML, { employees: results });
+
+            await page.setContent(renderedHTML);
+
+            // Generate PDF
+            const pdfBuffer = await page.pdf({ format: 'A4' });
+
+            // Close the browser
+            await browser.close();
+
+            // Set the response headers for PDF file
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename="employee_report.pdf"');
+
+            // Send the PDF file as response
+            res.send(pdfBuffer);
+        } catch (err) {
+            console.error('Error generating PDF:', err);
+            res.status(500).send('Error generating PDF.');
+        }
+    });
+});
 
 
 app.listen(PORT, () => {

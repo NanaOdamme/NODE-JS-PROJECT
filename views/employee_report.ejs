@@ -1,0 +1,54 @@
+<h1 class="text-3xl text-center font-bold text-blue-800">Employees Reports</h1>
+
+<form action="/employees-report" method="GET" class="max-w-sm mx-auto mt-8">
+    <div class="items-center mb-4">
+        <label for="department" class="mr-2">Select Department:</label>
+        <select name="department" id="department" class="p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+            <option value="">All Employees</option>
+            <% departments.forEach(department => { %>
+                <option value="<%= department.id %>"><%= department.name %></option>
+            <% }); %>
+        </select>
+        <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Filter</button>
+    </div>
+</form>
+
+    
+<div class="bg-white mt-5 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <header class="text-center mb-4">
+        <h1 class="text-3xl font-bold text-green-500">Employee List By Departments</h1>
+        <p class="text-gray-600 mt-2">Generated on: <span id="date"></span> at <span id="time"></span></p>
+    </header>
+    <hr class="my-4 border-t-2 border-blue-300">
+    <div class="overflow-x-auto rounded-lg">
+    <table class="mb-6 min-w-full border-collapse border border-gray-300">
+        <thead>
+            <tr class="bg-blue-200">
+                <th class="px-4 py-2 border-r border-gray-300">Employee Name</th>
+                <th class="px-4 py-2">Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% employees.forEach(employee => { %>
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2 border-r border-gray-300"><%= employee.fullName %></td>
+                    <td class="px-4 py-2"><%= employee.departmentName %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<div class="justify-end mt-5">
+<a href="/print-report" class="mt-5 ml-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Print</a>
+</div>
+    <script>
+        // JavaScript to get current date and time
+        const currentDate = new Date().toLocaleDateString();
+        const currentTime = new Date().toLocaleTimeString();
+        document.getElementById('date').innerText = currentDate;
+        document.getElementById('time').innerText = currentTime;
+    </script>
+
+
