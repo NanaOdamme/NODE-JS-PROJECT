@@ -1,0 +1,64 @@
+<div class="container mx-auto px-4 py-8">
+    <a href="/assign-loan" class=" bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Assign Loan to Employee</a>
+    <h1 class="text-3xl mb-4 mt-10">Loan Types</h1>
+
+    <!-- Display existing loan types -->
+    <table class="w-full mb-8">
+        <thead>
+          <tr>
+            <th class="text-left">Loan Type</th>
+            <th class="text-left">Max Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% loanTypes.forEach(loanType => { %>
+          <tr class="border-b border-gray-700">
+            <td class="py-2"><span class="font-semibold"><%= loanType.type %></span></td>
+            <td class="py-2">$<%= loanType.max_amount %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+    <!-- Form to add a new loan type -->
+    <h2 class="text-2xl mb-4">Add New Loan Type</h2>
+    <form action="/loan-types/add" method="POST" class="mb-8">
+      <label for="type" class="block mb-2">Loan Type:</label>
+      <input type="text" name="type" id="type" required
+        class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4 mb-2">
+      <br>
+      <label for="maxAmount" class="block mb-2">Max Amount:</label>
+      <input type="number" name="maxAmount" id="maxAmount" required
+        class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4 mb-2">
+      <br>
+      <button type="submit"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Add Loan Type</button>
+    </form>
+
+    <!-- Form to update a loan type -->
+    <h2 class="text-2xl mb-4">Update Loan Type</h2>
+    <ul>
+      <% loanTypes.forEach(loanType => { %>
+      <li class="mb-4">
+        <span class="font-semibold"><%= loanType.type %></span> - Max Amount: $<%= loanType.max_amount %>
+        <form action="/loan-types/update/<%= loanType.id %>" method="POST" class="mt-2">
+          <label for="type" class="block mb-2">Loan Type:</label>
+          <input type="text" name="type" id="type" value="<%= loanType.type %>" required
+            class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4 mb-2">
+          <br>
+          <label for="maxAmount" class="block mb-2">Max Amount:</label>
+          <input type="number" name="maxAmount" id="maxAmount" value="<%= loanType.max_amount %>" required
+            class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4 mb-2">
+          <br>
+          <button type="submit"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Update</button>
+        </form>
+        <form action="/loan-types/delete/<%= loanType.id %>" method="POST" class="mt-2">
+          <button type="submit"
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
+        </form>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+

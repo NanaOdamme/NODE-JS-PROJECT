@@ -10,6 +10,7 @@ const multer = require('multer');
 const routes = require('./routes');
 const connection = require('./db');
 const path = require('path');
+const { title } = require('process');
 const app = express();
 const PORT = 3000;
 
@@ -970,6 +971,194 @@ async function getCompanyDetails(companyId) {
       throw error; // Forward the error to the caller
   }
 }
+
+//loans
+// Route to get all loan types
+app.get('/loan-setup', (req, res) => {
+  connection.query('SELECT * FROM loan_types', (err, results) => {
+    if (err) throw err;
+    res.render('loan-types', {title:'loans', loanTypes: results });
+  });
+});
+
+// Route to add a new loan type
+app.post('/loan-types/add', (req, res) => {
+  const { type, maxAmount } = req.body;
+
+  if (!type || !maxAmount || isNaN(maxAmount)) {
+    return res.status(400).send('Invalid input data');
+  }
+
+  const newLoanType = {
+    type: type,
+    max_amount: maxAmount
+  };
+
+  connection.query('INSERT INTO loan_types SET ?', newLoanType, (err, result) => {
+    if (err) throw err;
+    res.redirect('/loan-types');
+  });
+});
+
+// Route to update a loan type
+app.post('/loan-types/update/:id', (req, res) => {
+  const loanTypeId = req.params.id;
+  const { type, maxAmount } = req.body;
+
+  if (!type || !maxAmount || isNaN(maxAmount)) {
+    return res.status(400).send('Invalid input data');
+  }
+
+  const updatedLoanType = {
+    type: type,
+    max_amount: maxAmount
+  };
+
+  connection.query('UPDATE loan_types SET ? WHERE id = ?', [updatedLoanType, loanTypeId], (err, result) => {
+    if (err) throw err;
+    res.redirect('/loan-types');
+  });
+});
+
+
+// Route to delete a loan type
+app.post('/loan-types/delete/:id', (req, res) => {
+  const loanTypeId = req.params.id;
+
+  connection.query('DELETE FROM loan_types WHERE id = ?', [loanTypeId], (err, result) => {
+    if (err) throw err;
+    res.redirect('/loan-types');
+  });
+});
+
+
+// Route to render the assign loan form
+app.get('/assign-loan', (req, res) => {
+  connection.query('SELECT id, CONCAT(firstName, " ", IFNULL(middleName, ""), " ", lastName) AS fullName FROM employees', (error, employees) => {
+    if (error) {
+      throw error; // Handle the error appropriately, such as sending an error response
+    }
+
+    connection.query('SELECT * FROM loan_types', (err, loanTypes) => {
+      if (err) {
+        throw err; // Handle the error appropriately, such as sending an error response
+      }
+
+      res.render('assign-loan', { title: 'Assign Loan', employees: employees, loanTypes: loanTypes });
+    });
+  });
+});
+
+
+
+
+// Route to handle assigning a loan to an employee
+app.post('/assign-loan', (req, res) => {
+  const { employeeId, loanTypeId, amount, startDate, endDate } = req.body;
+
+  // Convert the amount to a valid decimal number
+  const parsedAmount = parseFloat(amount);
+  const parsedStartDate = new Date(startDate);
+  const parsedEndDate = new Date(endDate);
+
+  if (!employeeId || !loanTypeId || isNaN(parsedAmount)) {
+    return res.status(400).send('Invalid input data');
+  }
+
+  if (isNaN(parsedStartDate.getTime()) || isNaN(parsedEndDate.getTime())) {
+    return res.status(400).send('Invalid date format');
+  }
+
+  connection.query('SELECT max_amount FROM loan_types WHERE id = ?', [loanTypeId], (err, results) => {
+    if (err) throw err;
+
+    const maxAmount = parseFloat(results[0].max_amount);
+
+    if (parsedAmount > maxAmount) {
+      return res.status(400).send('Loan amount exceeds maximum amount for the selected loan type');
+    }
+
+    const loanData = {
+      employee_id: employeeId,
+      loan_type_id: loanTypeId,
+      amount: parsedAmount,
+      start_date: parsedStartDate.toISOString().slice(0, 10), // Format as YYYY-MM-DD
+      end_date: parsedEndDate.toISOString().slice(0, 10), // Format as YYYY-MM-DD
+      date_requested: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    };
+
+    // Insert the loan details into the employee_loans table
+    connection.query('INSERT INTO employee_loans SET ?', loanData, (err, result) => {
+      if (err) throw err;
+
+      // Call the stored procedure to calculate and update loan deductions
+      connection.query('CALL calculateLoanDeductions(?, ?, ?, ?)', [employeeId, loanData.start_date, loanData.end_date, loanData.amount], (err, result) => {
+        if (err) throw err;
+
+        res.send('Loan assigned successfully');
+      });
+    });
+  });
+});
+
+
+
+
+app.get('/employee-loans', (req, res) => {
+  // Fetch employees with loans and loan types from the database
+  const query = `
+    SELECT 
+      employees.id AS employeeId,
+      CONCAT(employees.firstName, ' ', employees.lastName) AS fullName,
+      employee_loans.id AS loanId,
+      loan_types.type AS loanName,
+      employee_loans.amount AS loanAmount,
+      employee_loans.start_date AS loanStartDate,
+      employee_loans.end_date AS loanEndDate,
+      employee_loans.deduction_amount AS deductionAmount -- Fetch deduction amount
+    FROM employees
+    INNER JOIN employee_loans ON employees.id = employee_loans.employee_id
+    INNER JOIN loan_types ON employee_loans.loan_type_id = loan_types.id
+  `;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      throw err; // Handle the error appropriately
+    }
+
+    // Group loan details by employee
+    const employeesWithLoans = results.reduce((acc, row) => {
+      const employeeId = row.employeeId;
+
+      if (!acc[employeeId]) {
+        acc[employeeId] = {
+          employeeId: row.employeeId,
+          fullName: row.fullName,
+          loans: [],
+        };
+      }
+
+      if (row.loanId) {
+        acc[employeeId].loans.push({
+          loanId: row.loanId,
+          loanName: row.loanName,
+          loanAmount: row.loanAmount,
+          loanStartDate: row.loanStartDate,
+          loanEndDate: row.loanEndDate,
+          deductionAmount: row.deductionAmount, // Include deductionAmount
+        });
+      }
+
+      return acc;
+    }, {});
+
+    const employeesList = Object.values(employeesWithLoans);
+
+    // Render the employee-loans-list.ejs file and pass the employee list with loans
+    res.render('employee-loans-list', { title: 'Loan List', employeesList: employeesList });
+  });
+});
+
 
 
 

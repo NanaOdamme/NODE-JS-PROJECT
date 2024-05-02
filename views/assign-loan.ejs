@@ -1,0 +1,41 @@
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl mb-4">Assign Loan to Employee</h1>
+    <form action="/assign-loan" method="POST" class="max-w-sm mx-auto">
+      <div class="mb-4">
+        <label for="employeeId" class="block mb-2">Select Employee:</label>
+        <select name="employeeId" id="employeeId" required
+          class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4">
+          <% employees.forEach(employee => { %>
+            <option value="<%= employee.id %>"><%= employee.fullName %></option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="loanTypeId" class="block mb-2">Select Loan Type:</label>
+        <select name="loanTypeId" id="loanTypeId" required
+          class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4">
+          <% loanTypes.forEach(loanType => { %>
+          <option value="<%= loanType.id %>"><%= loanType.type %> - Max Amount: $<%= loanType.max_amount %></option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="amount" class="block mb-2">Loan Amount:</label>
+        <input type="number" name="amount" id="amount" step="0.01" required
+          class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-4">
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+      
+        <label for="endDate" class="block text-sm font-medium text-gray-700">End Date:</label>
+        <input type="date" id="endDate" name="endDate" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+      </div>
+      
+      <button type="submit"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Assign Loan</button>
+    </form>
+
+  </div>
+  
+

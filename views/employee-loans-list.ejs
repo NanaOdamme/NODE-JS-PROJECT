@@ -1,0 +1,43 @@
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"> <!-- Responsive container -->
+    <h1 class="text-3xl font-bold mb-4">Employees with Loans</h1>
+  
+    <% if (employeesList.length > 0) { %>
+      <div class="-mx-4 sm:-mx-8 overflow-x-auto"> <!-- Horizontal scroll for small screens -->
+        <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <table class="min-w-full">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="py-2 px-3 text-left font-semibold">Employee</th>
+                    <th class="py-2 px-3 text-left font-semibold">Loan</th>
+                    <th class="py-2 px-3 text-left font-semibold">Amount</th>
+                    <th class="py-2 px-3 text-left font-semibold">Start Date</th>
+                    <th class="py-2 px-3 text-left font-semibold">End Date</th>
+                    <th class="py-2 px-3 text-left font-semibold">Deduction Amount</th> <!-- New column for deductionAmount -->
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <% employeesList.forEach(employee => { %>
+                    <% employee.loans.forEach(loan => { %>
+                      <tr>
+                        <td class="py-2 px-3"><%= employee.fullName %></td>
+                        <td class="py-2 px-3"><%= loan.loanName %></td>
+                        <td class="py-2 px-3"><%= loan.loanAmount %></td>
+                        <td class="py-2 px-3"><%= loan.loanStartDate %></td>
+                        <td class="py-2 px-3"><%= loan.loanEndDate %></td>
+                        <td class="py-2 px-3"><%= loan.deductionAmount %></td> <!-- Display deductionAmount -->
+                      </tr>
+                    <% }) %>
+                  <% }) %>
+                </tbody>
+              </table>
+              
+        </div>
+      </div>
+    <% } else { %>
+      <p class="mt-4">No employees with loans found.</p>
+    <% } %>
+    <div class="flex justify-end mt-5"> <!-- Aligns to the right -->
+      <a href="/assign-loan" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Assign Loan</a>
+    </div>
+  </div>
+  
