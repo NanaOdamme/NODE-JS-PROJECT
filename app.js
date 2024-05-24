@@ -20,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(expressLayouts);
+app.use(express.json());
 app.set('layout', 'layouts/layout');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -573,15 +574,22 @@ app.post('/cities', async (req, res) => {
   const { cityName, countryId } = req.body;
 
   try {
+      // Check if a city with the same name exists for the same country
+      const existingCity = await queryAsync('SELECT * FROM cities WHERE name = ? AND country_id = ?', [cityName, countryId]);
+      if (existingCity.length > 0) {
+          return res.json({ success: false, message: 'City with this name already exists in the same country' });
+      }
+
       // Insert the new city into the database
       await queryAsync('INSERT INTO cities (name, country_id) VALUES (?, ?)', [cityName, countryId]);
       console.log('City created successfully');
+      return res.json({ success: true, message: 'City created successfully' });
   } catch (error) {
       console.error('Error creating city:', error);
-      res.status(500).send('Error creating city');
+      return res.status(500).json({ success: false, message: 'Error creating city' });
   }
-  res.send('city added')
 });
+
 // Helper function to run queries asynchronously
 function queryAsync(sql, values) {
   return new Promise((resolve, reject) => {
